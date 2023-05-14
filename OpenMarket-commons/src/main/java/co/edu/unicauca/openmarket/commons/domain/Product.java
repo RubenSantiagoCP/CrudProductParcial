@@ -1,130 +1,90 @@
 package co.edu.unicauca.openmarket.commons.domain;
 
-import java.util.Date;
-
 /**
- * Cliente de Open Market
  *
  * @author Libardo, Julio
  */
 public class Product {
 
-    /**
-     * Cedula
-     */
-    private String id;
-    /**
-     * Nombres
-     */
-    private String firstName;
-    /**
-     * Apellidos
-     */
-    private String lastName;
-    /**
-     * Dirección de residencia
-     */
-    private String address;
-    /**
-     * Teléfono Móvil
-     */
-    private String mobile;
-    /**
-     * Email
-     */
-    private String email;
-    /**
-     * Sexo
-     */
-    private String gender;
 
-    /**
-     * Constructor parametrizado
-     *
-     * @param id cedula
-     * @param firstName nombres
-     * @param lastName apellidos
-     * @param address dirección
-     * @param mobile celular
-     * @param email email
-     * @param gender sexo
-     */
-    public Product(String id, String firstName, String lastName, String address, String mobile, String email, String gender) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.mobile = mobile;
-        this.email = email;
-        this.gender = gender;
+    private Long productId;
+
+    private String name;
+    
+    private String description;
+    
+    private double price;
+    
+    private Category category;
+    
+    private Location location;
+    
+    private User user;
+
+    public Product(Long productId, String name, String description, double price) {
+        this.productId = productId;
+        this.name = name;
+        this.description = description;
+        this.price = price;
     }
 
-    /**
-     * Constructor por defecto
-     */
     public Product() {
-
     }
 
-    /**
-     * Getters and Setters
-     *
-     * @return
-     */
-    public String getId() {
-        return id;
+    public Long getProductId() {
+        return productId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setProductId(Long productId) {
+        this.productId = productId;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getDescription() {
+        return description;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getAddress() {
-        return address;
+    public double getPrice() {
+        return price;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
-    public String getMobile() {
-        return mobile;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
-    public String getEmail() {
-        return email;
+    public Location getLocation() {
+        return location;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
-    public String getGender() {
-        return gender;
+    public User getUser() {
+        return user;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setUser(User user) {
+        this.user = user;
     }
-
+    
 }
