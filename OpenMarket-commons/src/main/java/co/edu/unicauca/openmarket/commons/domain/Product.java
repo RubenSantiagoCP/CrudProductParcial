@@ -1,4 +1,4 @@
-package co.unicauca.travelagency.commons.domain;
+package co.edu.unicauca.openmarket.commons.domain;
 
 import java.util.Date;
 
@@ -7,7 +7,7 @@ import java.util.Date;
  *
  * @author Libardo, Julio
  */
-public class Customer {
+public class Product {
 
     /**
      * Cedula
@@ -49,7 +49,7 @@ public class Customer {
      * @param email email
      * @param gender sexo
      */
-    public Customer(String id, String firstName, String lastName, String address, String mobile, String email, String gender) {
+    public Product(String id, String firstName, String lastName, String address, String mobile, String email, String gender) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -62,7 +62,7 @@ public class Customer {
     /**
      * Constructor por defecto
      */
-    public Customer() {
+    public Product() {
 
     }
 

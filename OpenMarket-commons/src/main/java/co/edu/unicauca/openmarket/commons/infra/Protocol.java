@@ -1,4 +1,4 @@
-package co.edu.unicauca.openmarket.openmarket.commons.infra;
+package co.edu.unicauca.openmarket.commons.infra;
 
 import java.util.ArrayList;
 import java.util.List;
