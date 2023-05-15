@@ -14,7 +14,7 @@ public class Factory {
     /**
      *@brief Se hace uso del patron creacional singleton para la creacion de una unica instancia de factory
      */
-    public static Factory geInstance(){
+    public static Factory getInstance(){
         if(instance == null){
             instance = new Factory();
         }
@@ -27,7 +27,7 @@ public class Factory {
      * @param type cadena que indica qué tipo de clase hija debe instanciar
      * @return una clase hija de la abstracción IProductRepository
      */
-    public IProductRepository getRespository(String type){
+    public IProductRepository getRepository(String type){
         
         IProductRepository result = null;
         

@@ -8,7 +8,7 @@ import java.util.List;
  * @author Naren Imbachi
  */
 public interface IProductRepository {
-    boolean save(Product newProduct);
+    boolean save(Product newProduct) throws Exception;
     
     boolean edit(Long id, Product product);
     

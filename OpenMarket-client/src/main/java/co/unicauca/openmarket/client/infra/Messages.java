@@ -48,4 +48,12 @@ public class Messages {
     public static int confirmMessage(String mns, String title) {
         return JOptionPane.showConfirmDialog(null, mns, title, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
     }
+    
+    public static void showMessageDialog(String message, String title) {
+        JOptionPane.showMessageDialog(null, message, title, JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    public static int showConfirmDialog(String message, String title) {
+        return JOptionPane.showConfirmDialog(null, message, title, JOptionPane.INFORMATION_MESSAGE);
+    }
 }

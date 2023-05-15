@@ -65,7 +65,7 @@ public class OpenMarketSocket {
     /**
      * @brief Conectar socket
      */
-    public void conect() throws IOException{
+    public void connect() throws IOException{
         socket = new java.net.Socket(IP_SERVER, PORT);
         Logger.getLogger("SocketClient").log(Level.INFO, "Socket establecido");
     }

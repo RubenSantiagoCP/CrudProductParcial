@@ -58,8 +58,22 @@ public class OpenMarketHandler extends ServerHandler {
 
                 if (protocolRequest.getAction().equals("post")) {
                     // Agregar un product  
-                    boolean response1 = processPostCustomer(protocolRequest);
-                    return "true";
+                    response = processGetProduct(protocolRequest);
+                }
+                
+                if (protocolRequest.getAction().equals("edit")) {
+                    // Agregar un product  
+                   response = processGetProduct(protocolRequest);
+                }
+                
+                if (protocolRequest.getAction().equals("getAll")) {
+                    // Agregar un product  
+                   response = processGetProduct(protocolRequest);
+                }
+                
+                if (protocolRequest.getAction().equals("del")) {
+                    // Agregar un product  
+                   response = processGetProduct(protocolRequest);
                 }
                 break;
         }
