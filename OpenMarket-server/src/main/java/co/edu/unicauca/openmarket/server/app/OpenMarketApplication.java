@@ -2,12 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package co.edu.unicauca.openmarket.server.access;
+package co.edu.unicauca.openmarket.server.app;
 
 /**
  *
  * @author SANTIAGO
  */
-public class CustomerRepositoryImplArrays {
-    
+public class OpenMarketApplication {
+    public static void main(String[] args) {
+        
+    }
 }
