@@ -1,5 +1,6 @@
 package co.unicauca.openmarket.client.infra;
 
+import co.edu.unicauca.openmarket.commons.infra.Utilities;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Scanner;
@@ -22,10 +23,10 @@ public class OpenMarketSocket {
     
     //Ip del server Socket
     //EL ERROR SE SOLUCIONA AL AGREGAR EL COMMONS EN LAS DEPENDENCIA Y TOCA IMPORTAR
-    //private final String IP_SERVER = Utilities.loadProperty("server.ip");
+    private final String IP_SERVER = Utilities.loadProperty("server.ip");
     
     //Puerto del server Spcket 
-    //private final int PORT = Integer.parseInt(Utilities.loadProperty("server.port"));
+    private final int PORT = Integer.parseInt(Utilities.loadProperty("server.port"));
 
     /**
      * @brief envia una solicitud desde la aplicacion cliente al servidor por medio de socket
@@ -64,10 +65,10 @@ public class OpenMarketSocket {
     /**
      * @brief Conectar socket
      */
-    /*public void conect() throws IOException{
+    public void conect() throws IOException{
         socket = new java.net.Socket(IP_SERVER, PORT);
         Logger.getLogger("SocketClient").log(Level.INFO, "Socket establecido");
-    }*/
+    }
     
     /**
      * @brief Desconectar el socket

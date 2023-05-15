@@ -1,4 +1,5 @@
-D:\Unicauca\Estilos de Arquitectura\Cliente-Servidor\Cliente-Servidor-Sockets\strategyserver\src\main\java\co\unicauca\strategyserver\infra\ServerSocketMultiThread.java
-D:\Unicauca\Estilos de Arquitectura\Cliente-Servidor\Cliente-Servidor-Sockets\strategyserver\src\main\java\co\unicauca\strategyserver\infra\ServerHandler.java
-D:\Unicauca\Estilos de Arquitectura\Cliente-Servidor\Cliente-Servidor-Sockets\strategyserver\src\main\java\co\unicauca\strategyserver\helpers\JsonError.java
-D:\Unicauca\Estilos de Arquitectura\Cliente-Servidor\Cliente-Servidor-Sockets\strategyserver\src\main\java\co\unicauca\strategyserver\helpers\Utilities.java
+C:\Users\SANTIAGO\Desktop\ESCRITORIO\INGENIERIA DE SISTEMAS\SEXTO SEMESTRE\INGENIERIA DE SOFTWARE II\SEGUNDO CORTE\PARCIAL 1\OpenMarketParcial\strategyserver\src\main\java\co\unicauca\strategyserver\helpers\JsonError.java
+C:\Users\SANTIAGO\Desktop\ESCRITORIO\INGENIERIA DE SISTEMAS\SEXTO SEMESTRE\INGENIERIA DE SOFTWARE II\SEGUNDO CORTE\PARCIAL 1\OpenMarketParcial\strategyserver\src\main\java\co\unicauca\strategyserver\infra\EchoServerExample.java
+C:\Users\SANTIAGO\Desktop\ESCRITORIO\INGENIERIA DE SISTEMAS\SEXTO SEMESTRE\INGENIERIA DE SOFTWARE II\SEGUNDO CORTE\PARCIAL 1\OpenMarketParcial\strategyserver\src\main\java\co\unicauca\strategyserver\infra\ServerHandler.java
+C:\Users\SANTIAGO\Desktop\ESCRITORIO\INGENIERIA DE SISTEMAS\SEXTO SEMESTRE\INGENIERIA DE SOFTWARE II\SEGUNDO CORTE\PARCIAL 1\OpenMarketParcial\strategyserver\src\main\java\co\unicauca\strategyserver\infra\ServerSocketMultiThread.java
+C:\Users\SANTIAGO\Desktop\ESCRITORIO\INGENIERIA DE SISTEMAS\SEXTO SEMESTRE\INGENIERIA DE SOFTWARE II\SEGUNDO CORTE\PARCIAL 1\OpenMarketParcial\strategyserver\src\main\java\co\unicauca\strategyserver\helpers\Utilities.java
