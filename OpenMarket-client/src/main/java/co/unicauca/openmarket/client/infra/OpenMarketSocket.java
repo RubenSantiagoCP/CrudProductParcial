@@ -22,7 +22,7 @@ public class OpenMarketSocket {
     
     //Ip del server Socket
     //EL ERROR SE SOLUCIONA AL AGREGAR EL COMMONS EN LAS DEPENDENCIA Y TOCA IMPORTAR
-    //private final String IP_SEERVER = Utilities.loadProperty("server.ip");
+    //private final String IP_SERVER = Utilities.loadProperty("server.ip");
     
     //Puerto del server Spcket 
     //private final int PORT = Integer.parseInt(Utilities.loadProperty("server.port"));
