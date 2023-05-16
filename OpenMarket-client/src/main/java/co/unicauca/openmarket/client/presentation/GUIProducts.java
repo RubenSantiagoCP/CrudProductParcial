@@ -4,6 +4,7 @@ import co.unicauca.openmarket.client.domain.Product;
 import co.unicauca.openmarket.client.domain.services.ProductService;
 import co.unicauca.openmarket.client.infra.Messages;
 import co.unicauca.openmarket.client.presentation.commands.OMAddProductCommand;
+import co.unicauca.openmarket.client.presentation.commands.OMDelProductCommand;
 import co.unicauca.openmarket.client.presentation.commands.OMInvoker;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,6 +19,7 @@ public class GUIProducts extends javax.swing.JFrame {
     private ProductService productService;
     private boolean addOption;
     private OMInvoker ominvoker;
+    private boolean bandNuevo = false;
 
     /**
      * Creates new form GUIProducts
@@ -141,6 +143,11 @@ public class GUIProducts extends javax.swing.JFrame {
                 txtIdFocusLost(evt);
             }
         });
+        txtId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdActionPerformed(evt);
+            }
+        });
         pnlCenter.add(txtId);
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -206,7 +213,7 @@ public class GUIProducts extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void txtIdFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtIdFocusLost
-        if (txtId.getText().trim().equals("")) {
+        if (txtId.getText().trim().equals("") || bandNuevo) {
             return;
         }
         Long productId = Long.parseLong(txtId.getText());
@@ -234,9 +241,13 @@ public class GUIProducts extends javax.swing.JFrame {
             return;
         }
         Long productId = Long.parseLong(id);
+
         if (Messages.showConfirmDialog("Está seguro que desea eliminar este producto?", "Confirmación") == JOptionPane.YES_NO_OPTION) {
             try {
-                if (productService.deleteProduct(productId)) {
+                OMDelProductCommand comm = new OMDelProductCommand(productId, productService);
+                ominvoker.addCommand(comm);
+                ominvoker.execute();
+                if (comm.result()) {
                     Messages.showMessageDialog("Producto eliminado con éxito", "Atención");
                     stateInitial();
                     cleanControls();
@@ -255,12 +266,17 @@ public class GUIProducts extends javax.swing.JFrame {
 
     private void btnDeshacerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeshacerActionPerformed
         // TODO add your handling code here:
-        
+
         ominvoker.unexecute();
-        if(!ominvoker.hasMoreCommands())
+        if (!ominvoker.hasMoreCommands()) {
             this.btnDeshacer.setVisible(false);
-        
+        }
+
     }//GEN-LAST:event_btnDeshacerActionPerformed
+
+    private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdActionPerformed
     private void stateEdit() {
         btnNuevo.setVisible(false);
         btnEditar.setVisible(false);
@@ -286,7 +302,7 @@ public class GUIProducts extends javax.swing.JFrame {
         txtName.setEnabled(false);
         txtDescription.setEnabled(false);
         btnDeshacer.setVisible(ominvoker.hasMoreCommands());
-
+        bandNuevo = false;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -317,10 +333,11 @@ public class GUIProducts extends javax.swing.JFrame {
         btnCerrar.setVisible(false);
         btnSave.setVisible(true);
         btnFind.setVisible(false);
-        txtId.setEnabled(false);
+        txtId.setEnabled(true);
         txtName.setEnabled(true);
         txtDescription.setEnabled(true);
         btnDeshacer.setVisible(ominvoker.hasMoreCommands());
+        bandNuevo = true;
     }
 
     private void cleanControls() {
@@ -330,10 +347,11 @@ public class GUIProducts extends javax.swing.JFrame {
     }
 
     private void addProduct() {
+        Long id = Long.parseLong(txtId.getText().trim());
         String name = txtName.getText().trim();
         String description = txtDescription.getText().trim();
-        Product product = new Product(0L, name, description,0);
-        OMAddProductCommand comm= new OMAddProductCommand(product, productService);
+        Product product = new Product(id, name, description, 0);
+        OMAddProductCommand comm = new OMAddProductCommand(product, productService);
         ominvoker.addCommand(comm);
         ominvoker.execute();
         if (comm.result()) {

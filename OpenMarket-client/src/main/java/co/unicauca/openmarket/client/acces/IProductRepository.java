@@ -18,4 +18,6 @@ public interface IProductRepository {
     Product findById(Long id)throws Exception;
     
     List<Product> findAll()throws Exception;
+    
+    Product findByName(String name) throws Exception;
 }

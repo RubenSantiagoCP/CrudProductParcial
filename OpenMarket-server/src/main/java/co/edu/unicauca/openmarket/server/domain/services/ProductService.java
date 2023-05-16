@@ -43,21 +43,11 @@ public class ProductService{
         return repo.findById(id);
     }
     
-     public synchronized boolean saveProduct(Product product) {
-        
-         /*
-        Product newProduct = new Product();
-        newProduct.setName(name);
-        newProduct.setDescription(description);
-        
-        //Validate product
-        if (newProduct.getName().isBlank() ) {
-            return false;
-        }
-        boolean respuesta = repo.save(newProduct);
-        this.notificar();*/
-        //this.notificar();
-        
+     public synchronized Product findProductByName(String name){
+        return repo.findByName(name);
+    }
+    
+     public synchronized boolean saveProduct(Product product) {     
         boolean  respond = repo.save(product);
         return  respond; 
         

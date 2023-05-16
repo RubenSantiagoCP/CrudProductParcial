@@ -51,5 +51,10 @@ public class LoadDataRepositoryDecorator implements IProductRepository{
         }
         return true;
     }
+
+    @Override
+    public Product findByName(String name) {
+       return this.repository.findByName(name);
+    }
     
 }

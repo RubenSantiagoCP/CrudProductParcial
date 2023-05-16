@@ -93,6 +93,11 @@ public final class ProductRepositoryImplArrays implements  IProductRepository{
     public List<Product> findAll() {
         return products;
     }
+
+    @Override
+    public Product findByName(String name) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
    
     

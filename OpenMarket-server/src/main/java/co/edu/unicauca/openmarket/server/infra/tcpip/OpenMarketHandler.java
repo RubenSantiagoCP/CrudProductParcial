@@ -75,6 +75,11 @@ public class OpenMarketHandler extends ServerHandler {
                     // Agregar un product  
                    response = processDelProduct(protocolRequest);
                 }
+                
+                if (protocolRequest.getAction().equals("get-name")) {
+                    // Agregar un product  
+                   response = processGetNameProduct(protocolRequest);
+                }
                 break;
         }
         return response;
@@ -105,14 +110,15 @@ public class OpenMarketHandler extends ServerHandler {
      */
     private String processPostProduct(Protocol protocolRequest) {
         // Reconstruir el producto a partid de lo que viene en los parámetros
-        String name = protocolRequest.getParameters().get(0).getValue();
-        String description = protocolRequest.getParameters().get(1).getValue();
+        Long id = Long.parseLong(protocolRequest.getParameters().get(0).getValue());
+        String name = protocolRequest.getParameters().get(1).getValue();
+        String description = protocolRequest.getParameters().get(2).getValue();
         
         Product product = new Product();
         
         product.setName(name);
         product.setDescription(description);
-        product.setProductId(1L);
+        product.setProductId(id);
 
         boolean response = getService().saveProduct(product);
         return String.valueOf(response) ;
@@ -179,6 +185,18 @@ public class OpenMarketHandler extends ServerHandler {
      */
     public void setService(ProductService service) {
         this.service = service;
+    }
+
+    private String processGetNameProduct(Protocol protocolRequest) {
+          // Extraer el id del primer parámetro
+        String name = protocolRequest.getParameters().get(0).getValue();
+        Product product = service.findProductByName(name);
+        if (product == null) {
+            String errorJson = generateNotFoundErrorJson();
+            return errorJson;
+        } else {
+            return objectToJSON(product);
+        }
     }
    
 }

@@ -21,10 +21,11 @@ public class ProductService extends Observado{
     }
     
     //Metodos
-    public boolean saveProduct(String name, String description) throws Exception{
+    public boolean saveProduct(Long id, String name, String description) throws Exception{
         Product newProduct = new Product();
         newProduct.setName(name);
         newProduct.setDescription(description);
+        newProduct.setProductId(id);
         
         //Validate product
         if (newProduct.getName().isBlank() ) {
@@ -46,6 +47,11 @@ public class ProductService extends Observado{
         return repository.findById(id);
     }
     
+    public Product findProductByName(String name) throws Exception{
+        this.notificar();
+        return repository.findByName(name);
+    }
+    
     public boolean deleteProduct(Long id) throws Exception{
         boolean result;
         result = repository.delete(id);
@@ -57,7 +63,8 @@ public class ProductService extends Observado{
         if (prod == null || prod.getName().isBlank() ) {
             return false;
         }
+        boolean response = repository.edit(productId, prod);
         this.notificar();
-        return repository.edit(productId, prod);
+        return response;
     }
 }

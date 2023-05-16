@@ -37,12 +37,13 @@ public class ProductRepository implements IProductRepository {
             }
             //this.connect();
 
-            String sql = "INSERT INTO products ( name, description ) "
-                    + "VALUES ( ?, ? )";
+            String sql = "INSERT INTO products (productId, name, description ) "
+                    + "VALUES ( ?, ?, ? )";
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, newProduct.getName());
-            pstmt.setString(2, newProduct.getDescription());
+            pstmt.setLong(1, newProduct.getProductId());
+            pstmt.setString(2, newProduct.getName());
+            pstmt.setString(3, newProduct.getDescription());
             pstmt.executeUpdate();
             //this.disconnect();
             return true;
@@ -81,7 +82,7 @@ public class ProductRepository implements IProductRepository {
     private void initDatabase() {
         // SQL statement for creating a new table
         String sql = "CREATE TABLE IF NOT EXISTS products (\n"
-                + "	productId integer PRIMARY KEY AUTOINCREMENT,\n"
+                + "	productId integer PRIMARY KEY,\n"
                 + "	name text NOT NULL,\n"
                 + "	description text NULL\n"
                 + ");";
@@ -180,6 +181,35 @@ public class ProductRepository implements IProductRepository {
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setLong(1, id);
+
+            ResultSet res = pstmt.executeQuery();
+
+            if (res.next()) {
+                Product prod = new Product();
+                prod.setProductId(res.getLong("productId"));
+                prod.setName(res.getString("name"));
+                prod.setDescription(res.getString("description"));
+                return prod;
+            } else {
+                return null;
+            }
+            //this.disconnect();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    @Override
+    public Product findByName(String name) {
+        try {
+
+            String sql = "SELECT * FROM products  "
+                    + "WHERE name = ?";
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, name);
 
             ResultSet res = pstmt.executeQuery();
 

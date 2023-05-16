@@ -7,6 +7,7 @@ package co.unicauca.openmarket.client.presentation;
 
 import co.unicauca.openmarket.client.domain.Product;
 import co.unicauca.openmarket.client.domain.services.ProductService;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -156,7 +157,25 @@ public class GUIProductsFind extends javax.swing.JDialog implements Observador{
     }//GEN-LAST:event_btnSearchAllActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        // TODO add your handling code here:
+         List<Product> listaProductos= new ArrayList<>();
+     
+        if(this.rdoId.isSelected()){
+             try {
+                 listaProductos.add(productService.findProductById(Long.parseLong(this.txtSearch.getText())));
+             } catch (Exception ex) {
+                 Logger.getLogger(GUIProductsFind.class.getName()).log(Level.SEVERE, null, ex);
+             }
+            fillTable(listaProductos);
+        }
+        
+        if(this.rdoName.isSelected()){
+             try {
+                 listaProductos.add(productService.findProductByName(this.txtSearch.getText()));
+             } catch (Exception ex) {
+                 Logger.getLogger(GUIProductsFind.class.getName()).log(Level.SEVERE, null, ex);
+             }
+            fillTable(listaProductos);
+        }
     }//GEN-LAST:event_btnSearchActionPerformed
 
  
