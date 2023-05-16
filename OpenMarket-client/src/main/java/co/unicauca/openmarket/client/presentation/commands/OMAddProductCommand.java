@@ -7,6 +7,8 @@ package co.unicauca.openmarket.client.presentation.commands;
 import co.unicauca.openmarket.client.domain.Product;
 import co.unicauca.openmarket.client.domain.services.ProductService;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -26,15 +28,28 @@ public class OMAddProductCommand extends OMCommand {
     
     @Override
     public void make() {
-        result = pS.saveProduct(pP.getName(), pP.getDescription());
+        try {
+            result = pS.saveProduct(pP.getName(), pP.getDescription());
+        } catch (Exception ex) {
+            Logger.getLogger(OMAddProductCommand.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     public void unmake() {
-        List<Product> products = pS.findAllProducts();
+        List<Product> products = null;
+        try {
+            products = pS.findAllProducts();
+        } catch (Exception ex) {
+            Logger.getLogger(OMAddProductCommand.class.getName()).log(Level.SEVERE, null, ex);
+        }
         for(Product each: products){
             if(each.getName().equals(pP.getName())){
-                result = pS.deleteProduct(each.getProductId());
+                try {
+                    result = pS.deleteProduct(each.getProductId());
+                } catch (Exception ex) {
+                    Logger.getLogger(OMAddProductCommand.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
     }

@@ -39,10 +39,10 @@ public class Factory {
 
         switch (type) {
             case "default":
-                result = new ProductRepositoryImplArrays();
-                break;
-            case "sql":
                 result = new ProductRepository();
+                break;
+            case "array":
+                result = new ProductRepositoryImplArrays();
                 break;
         }
 

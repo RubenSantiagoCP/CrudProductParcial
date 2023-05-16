@@ -33,7 +33,7 @@ public class Factory {
         
         switch (type){
             case "default":
-                result =  new ProductRepositoryImplSockets();
+                result =  new ProductAccessImplSockets();
                 break;
         }
         

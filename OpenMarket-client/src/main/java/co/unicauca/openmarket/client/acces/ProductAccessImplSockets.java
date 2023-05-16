@@ -8,6 +8,8 @@ import co.edu.unicauca.openmarket.commons.infra.JsonError;
 import co.edu.unicauca.openmarket.commons.infra.Protocol;
 import co.unicauca.openmarket.client.domain.Product;
 import co.unicauca.openmarket.client.infra.OpenMarketSocket;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.List;
@@ -58,7 +60,7 @@ public class ProductAccessImplSockets implements IProductRepository{
     @Override
     public boolean edit(Long id, Product product) throws Exception {
         String jsonResponse = null;
-        String requestJson = doDeleteProductRequestJson(id.toString());
+        String requestJson = doEditProductRequest(product);
         System.out.println(requestJson);
         boolean ban = false;
         
@@ -143,8 +145,7 @@ public class ProductAccessImplSockets implements IProductRepository{
 
     @Override
     public List<Product> findAll() throws Exception{
-        return null;
-        /*String jsonResponse = null;
+        String jsonResponse = null;
         String requestJson = doFindAll();
         System.out.println(requestJson);
         
@@ -165,11 +166,11 @@ public class ProductAccessImplSockets implements IProductRepository{
                 throw new Exception(extractMessages(jsonResponse));
             }else{
                 //Encontro el producto
-                Product product = jsonToProduct(jsonResponse);
+                List<Product> lstProductos = this.jsonToListProducts(jsonResponse);
                 Logger.getLogger(ProductAccessImplSockets.class.getName()).log(Level.INFO, "Lo que va en el JSon: ("+jsonResponse.toString()+ ")");
-                return product;
+                return lstProductos;
             }
-        }*/
+        }
     }
     // </editor-fold>
     
@@ -252,10 +253,12 @@ public class ProductAccessImplSockets implements IProductRepository{
 
     }
     
-    /*private List<Product> jsonToListProducts(String jsonCustomer){
-        Gson gson = new Gson();
-        List<Product> = gson.
-    }*/
+    private List<Product> jsonToListProducts(String jsonProduct) throws IOException{
+        ObjectMapper objMapp = new ObjectMapper();
+        List<Product> lstProducts =  objMapp.readValue(jsonProduct, new TypeReference<List<Product>>(){});
+        
+        return lstProducts;
+    }
     // </editor-fold>
     
     private String extractMessages(String jsonResponse) {

@@ -8,6 +8,8 @@ package co.unicauca.openmarket.client.presentation;
 import co.unicauca.openmarket.client.domain.Product;
 import co.unicauca.openmarket.client.domain.services.ProductService;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import reloj.frameworkobsobs.Observador;
 
@@ -111,6 +113,11 @@ public class GUIProductsFind extends javax.swing.JDialog implements Observador{
         pnlNorth.add(txtSearch);
 
         btnSearch.setText("Buscar");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
         pnlNorth.add(btnSearch);
 
         btnSearchAll.setText("Buscar Todos");
@@ -141,8 +148,16 @@ public class GUIProductsFind extends javax.swing.JDialog implements Observador{
     }//GEN-LAST:event_btnCloseActionPerformed
 
     private void btnSearchAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchAllActionPerformed
-        fillTable(productService.findAllProducts());
+        try {
+            fillTable(productService.findAllProducts());
+        } catch (Exception ex) {
+            Logger.getLogger(GUIProductsFind.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnSearchAllActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSearchActionPerformed
 
  
 
@@ -164,6 +179,10 @@ public class GUIProductsFind extends javax.swing.JDialog implements Observador{
 
     @Override
     public void actualizar() {
-        fillTable(productService.findAllProducts());
+        try {
+            fillTable(productService.findAllProducts());
+        } catch (Exception ex) {
+            Logger.getLogger(GUIProductsFind.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

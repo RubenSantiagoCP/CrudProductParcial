@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface IProductRepository {
     //boolean save(Product newProduct) throws Exception;
-    String save(Product newProduct) throws Exception;
+    boolean save(Product newProduct) throws Exception;
     
     boolean edit(Long id, Product product)throws Exception;
     

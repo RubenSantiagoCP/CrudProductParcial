@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @author SANTIAGO
  */
-public class ProductService extends Observado{
+public class ProductService{
      /**
      * Repositorio de Productos
      */
@@ -43,8 +43,9 @@ public class ProductService extends Observado{
         return repo.findById(id);
     }
     
-     public synchronized boolean saveProduct(String name, String description) {
+     public synchronized boolean saveProduct(Product product) {
         
+         /*
         Product newProduct = new Product();
         newProduct.setName(name);
         newProduct.setDescription(description);
@@ -54,8 +55,11 @@ public class ProductService extends Observado{
             return false;
         }
         boolean respuesta = repo.save(newProduct);
-        this.notificar();
-        return respuesta ;
+        this.notificar();*/
+        //this.notificar();
+        
+        boolean  respond = repo.save(product);
+        return  respond; 
         
 
     }
@@ -71,7 +75,6 @@ public class ProductService extends Observado{
     public synchronized boolean deleteProduct(Long id){
         boolean result;
         result = repo.delete(id);
-        this.notificar();
         return result;
     }
 

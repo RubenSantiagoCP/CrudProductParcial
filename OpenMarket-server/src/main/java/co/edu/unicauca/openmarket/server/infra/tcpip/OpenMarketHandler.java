@@ -105,10 +105,16 @@ public class OpenMarketHandler extends ServerHandler {
      */
     private String processPostProduct(Protocol protocolRequest) {
         // Reconstruir el producto a partid de lo que viene en los parámetros
-        String name = protocolRequest.getParameters().get(1).getValue();
-        String description = protocolRequest.getParameters().get(2).getValue();
+        String name = protocolRequest.getParameters().get(0).getValue();
+        String description = protocolRequest.getParameters().get(1).getValue();
+        
+        Product product = new Product();
+        
+        product.setName(name);
+        product.setDescription(description);
+        product.setProductId(1L);
 
-        boolean response = getService().saveProduct(name, description);
+        boolean response = getService().saveProduct(product);
         return String.valueOf(response) ;
     }
     

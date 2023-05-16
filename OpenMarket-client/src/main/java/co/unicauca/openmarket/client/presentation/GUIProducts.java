@@ -5,6 +5,8 @@ import co.unicauca.openmarket.client.domain.services.ProductService;
 import co.unicauca.openmarket.client.infra.Messages;
 import co.unicauca.openmarket.client.presentation.commands.OMAddProductCommand;
 import co.unicauca.openmarket.client.presentation.commands.OMInvoker;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -187,8 +189,12 @@ public class GUIProducts extends javax.swing.JFrame {
             addProduct();
 
         } else {
-            //Editar
-            editProduct();
+            try {
+                //Editar
+                editProduct();
+            } catch (Exception ex) {
+                Logger.getLogger(GUIProducts.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
     }//GEN-LAST:event_btnSaveActionPerformed
@@ -204,7 +210,12 @@ public class GUIProducts extends javax.swing.JFrame {
             return;
         }
         Long productId = Long.parseLong(txtId.getText());
-        Product prod = productService.findProductById(productId);
+        Product prod = null;
+        try {
+            prod = productService.findProductById(productId);
+        } catch (Exception ex) {
+            Logger.getLogger(GUIProducts.class.getName()).log(Level.SEVERE, null, ex);
+        }
         if (prod == null) {
             Messages.showMessageDialog("El identificador del producto no existe", "Error");
             txtId.setText("");
@@ -224,10 +235,14 @@ public class GUIProducts extends javax.swing.JFrame {
         }
         Long productId = Long.parseLong(id);
         if (Messages.showConfirmDialog("Está seguro que desea eliminar este producto?", "Confirmación") == JOptionPane.YES_NO_OPTION) {
-            if (productService.deleteProduct(productId)) {
-                Messages.showMessageDialog("Producto eliminado con éxito", "Atención");
-                stateInitial();
-                cleanControls();
+            try {
+                if (productService.deleteProduct(productId)) {
+                    Messages.showMessageDialog("Producto eliminado con éxito", "Atención");
+                    stateInitial();
+                    cleanControls();
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(GUIProducts.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
@@ -330,7 +345,7 @@ public class GUIProducts extends javax.swing.JFrame {
         }
     }
 
-    private void editProduct() {
+    private void editProduct() throws Exception {
         String id = txtId.getText().trim();
         if (id.equals("")) {
             Messages.showMessageDialog("Debe buscar el producto a editar", "Atención");
@@ -341,6 +356,7 @@ public class GUIProducts extends javax.swing.JFrame {
         Product prod = new Product();
         prod.setName(txtName.getText().trim());
         prod.setDescription(txtDescription.getText().trim());
+        prod.setProductId(productId);
 
         if (productService.editProduct(productId, prod)) {
             Messages.showMessageDialog("Se editó con éxito", "Atención");
