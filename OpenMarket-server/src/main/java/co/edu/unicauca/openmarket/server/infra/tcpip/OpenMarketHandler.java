@@ -37,7 +37,7 @@ public class OpenMarketHandler extends ServerHandler {
      *
      * @param requestJson petición que proviene del cliente socket en formato
      * json que viene de esta manera:
-     * "{"resource":"customer","action":"get","parameters":[{"name":"id","value":"1"}]}"
+     * "{"resource":"product","action":"get","parameters":[{"name":"id","value":"1"}]}"
      *
      */
    
@@ -58,22 +58,22 @@ public class OpenMarketHandler extends ServerHandler {
 
                 if (protocolRequest.getAction().equals("post")) {
                     // Agregar un product  
-                    response = processGetProduct(protocolRequest);
+                    response = processPostProduct(protocolRequest);
                 }
                 
                 if (protocolRequest.getAction().equals("edit")) {
                     // Agregar un product  
-                   response = processGetProduct(protocolRequest);
+                   response = processEditProduct(protocolRequest);
                 }
                 
                 if (protocolRequest.getAction().equals("getAll")) {
                     // Agregar un product  
-                   response = processGetProduct(protocolRequest);
+                   response = processGetAllProduct(protocolRequest);
                 }
                 
                 if (protocolRequest.getAction().equals("del")) {
                     // Agregar un product  
-                   response = processGetProduct(protocolRequest);
+                   response = processDelProduct(protocolRequest);
                 }
                 break;
         }
@@ -103,14 +103,44 @@ public class OpenMarketHandler extends ServerHandler {
      *
      * @param protocolRequest Protocolo de la solicitud
      */
-    private boolean processPostCustomer(Protocol protocolRequest) {
+    private String processPostProduct(Protocol protocolRequest) {
         // Reconstruir el producto a partid de lo que viene en los parámetros
         String name = protocolRequest.getParameters().get(1).getValue();
         String description = protocolRequest.getParameters().get(2).getValue();
 
         boolean response = getService().saveProduct(name, description);
-        return response;
+        return String.valueOf(response) ;
     }
+    
+     private String processEditProduct(Protocol protocolRequest) {
+        Product product = new Product();
+        
+        product.setProductId(Long.parseLong(protocolRequest.getParameters().get(0).getValue()));
+        product.setName(protocolRequest.getParameters().get(1).getValue());
+        product.setDescription(protocolRequest.getParameters().get(2).getValue());
+      
+        boolean result = getService().editProduct(Long.parseLong(protocolRequest.getParameters().get(0).getValue()), product);  
+        return String.valueOf(result);
+     }
+     
+      private String processGetAllProduct(Protocol protocolRequest) {
+          List<Product>  lstProducts ;
+          lstProducts = getService().findAllProducts();
+           if (lstProducts == null) {
+            String errorJson = generateNotFoundErrorJson();
+            return errorJson;
+        } else {
+            return objectToJSON(lstProducts);
+        } 
+      }
+      
+      private String processDelProduct(Protocol protocolRequest) {
+          Long id = Long.parseLong(protocolRequest.getParameters().get(0).getValue());
+          boolean result = getService().deleteProduct(id);
+          
+          return String.valueOf(result);
+     }
+
 
     /**
      * Genera un ErrorJson de producto no encontrado
@@ -143,6 +173,7 @@ public class OpenMarketHandler extends ServerHandler {
      */
     public void setService(ProductService service) {
         this.service = service;
-    } 
+    }
+   
 }
 
