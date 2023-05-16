@@ -8,13 +8,14 @@ import java.util.List;
  * @author Naren Imbachi
  */
 public interface IProductRepository {
-    boolean save(Product newProduct) throws Exception;
+    //boolean save(Product newProduct) throws Exception;
+    String save(Product newProduct) throws Exception;
     
-    boolean edit(Long id, Product product);
+    boolean edit(Long id, Product product)throws Exception;
     
-    boolean delete(Long id);
+    boolean delete(Long id)throws Exception;
 
-    Product findById(Long id);
+    Product findById(Long id)throws Exception;
     
-    List<Product> findAll();
+    List<Product> findAll()throws Exception;
 }
